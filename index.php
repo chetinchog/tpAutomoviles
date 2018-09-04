@@ -1,6 +1,5 @@
 <?php
-    require_once "./Auto.php";
-    require_once "./Camion.php";
+    require_once "./AutomovilesDB.php";
 
     echo '<!DOCTYPE html>';
     echo '<html lang="en">';
@@ -13,26 +12,14 @@
     echo '<body>';
     
     $opciones = [];
-    
-    $autos = [];
-    $auto1 = new Auto("TSG718", 4, 3);
-    array_push($autos, $auto1);
-    $auto2 = new Auto("OME921", 4, 4);
-    array_push($autos, $auto2);
-    foreach ($autos as $key => $value) {
-        array_push($opciones, '<option value="'.$value->getPatente().'">Auto: '.$value->getPatente().' - Ruedas: '.$value->getCantRuedas().' - Puertas: '.$value->getCantPuertas().'</option>');
+    foreach ($autos as $index => $auto) {
+        array_push($opciones, '<option value="'.$auto->getPatente().'">Auto: '.$auto->getPatente().' - Ruedas: '.$auto->getCantRuedas().' - Puertas: '.$auto->getCantPuertas().'</option>');
+    }
+    foreach ($camiones as $index => $camion) {
+        array_push($opciones, '<option value="'.$camion->getPatente().'">Camión: '.$camion->getPatente().' - Ruedas: '.$camion->getCantRuedas().' - Acoplados: '.$camion->getCantAcoplados().'</option>');
     }
 
-    $camiones = [];
-    $camion1 = new Camion("OKE981", 10, 2);
-    array_push($camiones, $camion1);
-    $camion2 = new Camion("QMS921", 18, 4);
-    array_push($camiones, $camion2);
-    foreach ($camiones as $key => $value) {
-        array_push($opciones, '<option value="'.$value->getPatente().'">Camión: '.$value->getPatente().' - Ruedas: '.$value->getCantRuedas().' - Acoplados: '.$value->getCantAcoplados().'</option>');
-    }
-
-    echo '<form action="AutomovilForm.php" method="POST">';
+    echo '<form action="BackEnd.php" method="POST">';
     echo '    <label for="name">Nombre: </label>';
     echo '    <input type="text" id="name" name="name" />';
     echo '    <br /><br />';
